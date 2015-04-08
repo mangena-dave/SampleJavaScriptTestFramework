@@ -1,0 +1,14 @@
+{
+    "test1":{
+        "desc": "Valid login",
+        "login": "<validLogin>",
+        "pass": "<validPass>",
+        "expected": "Welcome to Facebook"
+    },
+    "test2":{
+        "desc": "Invalid login",
+        "login": "someLogin",
+        "pass": "somePass",
+        "expected": "Fail"
+    }
+}
