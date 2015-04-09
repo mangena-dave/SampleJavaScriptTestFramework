@@ -1,14 +1,27 @@
 {
-    "test1":{
-        "desc": "Valid login",
-        "login": "<validLogin>",
+    "Valid credentials": { 
+        "login": "<validEmail>",
         "pass": "<validPass>",
-        "expected": "Welcome to Facebook"
+        "expected": "Facebook"
     },
-    "test2":{
-        "desc": "Invalid login",
+    "Invalid credentials": {
         "login": "someLogin",
         "pass": "somePass",
-        "expected": "Fail"
+        "expected": "Log into Facebook | Facebook"
+    },
+    "Blank login": {
+        "login": "",
+        "pass": "somePass",
+        "expected": "Log into Facebook | Facebook"
+    },    
+    "Blank password": {
+        "login": "someLogin",
+        "pass": "",
+        "expected": "Log into Facebook | Facebook"
+    },    
+    "No credentials": {
+        "login": "",
+        "pass": "",
+        "expected": "Log into Facebook | Facebook"
     }
 }

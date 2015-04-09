@@ -1,5 +1,6 @@
 {   
-    "browser":"chrome",
-    "url":"www.facebook.com"
+    "browser": "chrome",
+    "url": "https://www.facebook.com",
+    "testDesc": "Facebook Login Test"
 }
 

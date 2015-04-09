@@ -1,82 +1,46 @@
-/* index.js
-Quick login test with Facebook
-*/
+/** Sample login test against Facebook with data-driven test framework */
 
-//Module inclusions
-var fs = require('fs');
-var testObj = require('./testUtils');
-var webdriver = require('/node_modules/selenium-webdriver');
+// :TODO: Figure out a way to make this script reusable by pulling code
+//  out of it block into a module and auto-magically load it
+
+//Module inclusions           
+var testObj = require('./library/testUtils');       //Custom library to read config and data files
+var login = require('./library/loginPage');                 //Custom library to hold login information
 
 //Constants
-var CONFIG_FILE = "testConfig.json"
-var TEST_DATA_FILE = "testData.json"
+var CONFIG_FILE = "testConfig.json";        //Full path to test configuration
+var TEST_DATA_FILE = "testData.json";       //Full path to test data
+var TIMEOUT = 15000;                        //Used to adjust script timeout
 
-var test;       //test config and data
-var driver;     //Selenium browser driver
+var testInfo;                               //Imported test config and data
 
-describe('Facebook Login Test: ', function(){
-    //Set the time out to 15sec to allow the browser to load
-    this.timeout(10000);
+/** Main test script function
+* @param {string} testDesc - Test suite description
+* @param {string} testKey - Test case description used to find associated data in testInfo object
+*/
+function runTestScript(testDesc, testKey) {
+    describe(testDesc, function(){
+        this.timeout(TIMEOUT);   
 
-/*********************************** Test Setup *********************************************/
-    before(function(){
-        //Load test config and data
-        test = new testObj.testClass(CONFIG_FILE, TEST_DATA_FILE);
+        //This is where the actual test steps take place
+        it(testKey, function(done){ 
+            //Create a new test object
+            var loginPage = new login.loginPage(testInfo, testKey); 
 
-        //Initiate browser driver
+            //Load the page and attempt to login with given credentials
+            loginPage.loadPage();
+            loginPage.attemptLogin();
+            loginPage.close();
 
-    })
+            done();
+        }); 
+    }) 
+} 
 
-    after(function(){
-        //Close browser
+//Import the test config and test data into the testInfo hash
+testInfo = new testObj.testClass(CONFIG_FILE, TEST_DATA_FILE);
 
-    })
-
-    beforeEach(function(){
-        //Navigate to url
-        driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
-    })
-
-    afterEach(function(){
-        //Logout
-                driver.quit();
-    })
-
-/*********************************** Test Cases *********************************************/
-
-    describe('When entering login credentials', function(){
-        it('actual should match expected', function(done){
-            //Determine the number of tests to run
-            numTests = Object.keys(test.testData).length;
-            testNo = 1;
-
-            //Run every test from the testData file
-            while (testNo <= numTests) {
-                testKey = "test" + testNo.toString();
-
-                //retrieve test specific data
-                login = test.testData[testKey]['login'];
-                pass = test.testData[testKey]['pass'];
-                desc = test.testData[testKey]['desc'];
-                expected = test.testData[testKey]['expected'];
-
-                describe(testKey + ': ' + desc, function(){
-                    it('Expected is ' + expected, function(done) {
-                        driver.get(test.url);
-                        driver.findElement(webdriver.By.id('email')).sendKeys(login);
-                        driver.findElement(webdriver.By.id('pass')).sendKeys(pass);
-                        driver.findElement(webdriver.By.id('loginbutton')).click();
-                        driver.wait(function() {
-                            return driver.getTitle().then(function(title) {
-                                return title === expected;
-                                done();
-                            });
-                        }, 1000);
-                    })
-                })
-                //Increment the test count
-                testNo++;
-            }
-        })
-    })
-})
+//Run the test script for each test data set
+for (var k in testInfo.testData) {
+    runTestScript(testInfo.testDesc, k);
+} 
