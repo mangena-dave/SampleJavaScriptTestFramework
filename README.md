@@ -6,7 +6,7 @@ Implemented using NodeJS as the IDE and Mocha as the test framework. webdriver-s
 
 Setup required:
 
-NodeJS
+Node.js
 - https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 
 Mocha
@@ -16,7 +16,7 @@ webdriver-sync
 - https://www.npmjs.com/package/webdriver-sync
 * This is a synchronous wrapped version of the JAVA webdriver API
 
-** As of 4/8/2015, this will only work with NodeJS versions of v0.10.XX
+** As of 4/8/2015, this will only work with Node.js versions of v0.10.XX
 
 Relevant Files:
 
