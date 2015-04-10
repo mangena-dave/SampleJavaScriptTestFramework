@@ -40,7 +40,6 @@ Notes:
 
 2) You will have to enter valid creds in the testData.json file to pass the 'valid' test. For privacy reasons, I did not leave mine in :)
 
-3) This example framework will only support Chrome at the moment.
 
 TO-DO:
 
@@ -48,5 +47,5 @@ TO-DO:
 
 2) Figure out a way to make the main file load the actual script so that it can be re-used w/o recopying code
 
-3) Figure out why it doesn't work on FF
+
 
