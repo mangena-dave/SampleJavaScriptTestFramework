@@ -1,10 +1,9 @@
-Sample Data-Driven Test Framework
+#Sample Data-Driven Test Framework
 
-Uses data from a JSON file to test various login combinations against the Facebook landing page.
-
+Uses data from a JSON file to test various login combinations against the Facebook landing page.  
 Implemented using NodeJS as the IDE and Mocha as the test framework. webdriver-sync is used for web functions.
 
-Setup required:
+##Setup required
 
 Node.js
 - https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
@@ -13,12 +12,12 @@ Mocha
 - http://mochajs.org/#installation
 
 webdriver-sync
-- https://www.npmjs.com/package/webdriver-sync
-* This is a synchronous wrapped version of the JAVA webdriver API
+- https://www.npmjs.com/package/webdriver-sync  
+This is a synchronous wrapped version of the JAVA webdriver API
 
 ** As of 4/8/2015, this will only work with Node.js versions of v0.10.XX
 
-Relevant Files:
+##Relevant Files
 
 index.js - main file
 
@@ -30,7 +29,7 @@ testConfig.json - test script configuration data
 
 testData.json - test data used in the tests
 
-To run:
+##To run
 
 mocha index.js
 
@@ -41,11 +40,8 @@ Notes:
 2) You will have to enter valid creds in the testData.json file to pass the 'valid' test. For privacy reasons, I did not leave mine in :)
 
 
-TO-DO:
+##TO-DO
 
 1) Add exception handling for things like when the import files don't exist or the data is incorrect/incomplete
 
 2) Figure out a way to make the main file load the actual script so that it can be re-used w/o recopying code
-
-
-
